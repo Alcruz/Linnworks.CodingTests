@@ -40,8 +40,15 @@ namespace Linnworks.CodingTests.Part1.Server
 				app.UseHsts();
 			}
 
+			app.UseStaticFiles();
 			app.UseHttpsRedirection();
-			app.UseMvc();
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default",
+					template: "{controller}/{action}",
+					defaults: new { controller = "AngularJS", action = "Index" });
+			});
 		}
 	}
 }
