@@ -28,18 +28,19 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.js"></script>
 
-
 	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 </head>
 <body>
-	<ul class="menu">
-		<a ui-sref="hello" ui-sref-active="active">Hello</a>
-		<a ui-sref="about" ui-sref-active="active">About</a>
-	</ul>
-
-	<ui-view></ui-view>
+	<nav class="navbar navbar-inverse">
+	</nav>
+	<div class="container">
+		<categoriestable></categoriestable>
+	</div>
 
 	<script src="app/app.module.js"></script>
 	<script src="app/app.config.js"></script>
+
+	<script src="app/categories/categories-table.controller.js"></script>
+	<script src="app/categories/categories.service.js"></script>
 </body>
 </html>

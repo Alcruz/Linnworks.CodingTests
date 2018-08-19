@@ -1,0 +1,9 @@
+﻿<div>
+	<table ng-table="controller.tableParams" class="table" show-filter="true">
+		<tr ng-repeat="category in $data">
+			<td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+				{{category.name}}
+			</td>
+		</tr>
+	</table>
+</div>
