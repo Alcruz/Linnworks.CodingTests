@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <None Remove="index.html" />
+    <None Remove="Services\CustomScripts\ProductCategoriesCount.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="index.html" />
+    <EmbeddedResource Include="Services\CustomScripts\ProductCategoriesCount.sql" />
   </ItemGroup>
 
   <ItemGroup>

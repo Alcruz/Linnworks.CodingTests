@@ -1,8 +1,11 @@
 ﻿<div>
-	<table ng-table="controller.tableParams" class="table" show-filter="true">
+	<table ng-table="controller.tableParams" class="table">
 		<tr ng-repeat="category in $data">
-			<td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+			<td title="'Name'" sortable="'name'">
 				{{category.name}}
+			</td>
+			<td title="'Products Count'" sortable="'productsCount'">
+				{{category.productsCount}}
 			</td>
 		</tr>
 	</table>

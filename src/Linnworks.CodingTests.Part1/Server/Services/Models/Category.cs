@@ -13,5 +13,7 @@ namespace Linnworks.CodingTests.Part1.Server.Services.Models
 
 		[JsonProperty("CategoryName")]
 		public string Name { get; set; }
+
+		public int ProductsCount { get; set; }
 	}
 }

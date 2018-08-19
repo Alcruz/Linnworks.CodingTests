@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Linnworks.CodingTests.Part1.Server.Services.Models;
 
 namespace Linnworks.CodingTests.Part1.Server.Controllers
 {
@@ -21,10 +22,10 @@ namespace Linnworks.CodingTests.Part1.Server.Controllers
 		public async Task<ActionResult<IEnumerable<object>>> GetAllAsync()
 		{
 			var categories = await LinnWorksClient.GetCategories();
-			return Ok(categories.Select(category => new
-			{
+			return Ok(categories.Select(category => new { 
 				category.Id,
-				category.Name
+				category.Name,
+				category.ProductsCount
 			}));
 		}
 	}
