@@ -30,6 +30,20 @@ namespace Linnworks.CodingTests.Part1.Server.Services
 			});
 		}
 
+		public async Task DeleteCategory(string categoryId)
+		{
+			var response = await SendRequest("https://us.linnworks.net//api/Inventory/DeleteCategoryById", new Dictionary<string, string>
+			{
+				{ "categoryId", categoryId }
+			});
+
+			if (response.IsSuccessStatusCode)
+				return;
+
+
+			throw new InvalidOperationException();
+		}
+
 		private async Task<ExecuteCustomScriptResult<ProductCategoryCount>> GetProductCategoryCount()
 		{
 			return await ExecuteCustomScript<ProductCategoryCount>(EmbeddedResourceHelpers.ReadFile("Linnworks.CodingTests.Part1.Server.Services.CustomScripts.ProductCategoriesCount.sql"));
@@ -45,17 +59,22 @@ namespace Linnworks.CodingTests.Part1.Server.Services
 
 		private async Task<T> SendRequest<T>(string uri, Dictionary<string, string> body = null)
 		{
+			var response = await SendRequest(uri, body);
+			var content = await response.Content.ReadAsStringAsync();
+			var result = JsonConvert.DeserializeObject<T>(content);
+			return result;
+		}
+
+		private async Task<HttpResponseMessage> SendRequest(string uri, Dictionary<string, string> body = null)
+		{
 			var request = new HttpRequestMessage(HttpMethod.Post, uri);
-			request.Headers.Add("Authorization", "43e40f4b-1935-4a68-be44-bb3028a81e69");
+			request.Headers.Add("Authorization", "de259865-33b2-4f0c-a9c1-82958fb32cc9");
 			if (body != null)
 			{
 				request.Content = new FormUrlEncodedContent(body);
 			}
 
-			var response = await HttpClient.SendAsync(request);
-			var content = await response.Content.ReadAsStringAsync();
-			var result = JsonConvert.DeserializeObject<T>(content);
-			return result;
+			return await HttpClient.SendAsync(request);
 		}
 	}
 }

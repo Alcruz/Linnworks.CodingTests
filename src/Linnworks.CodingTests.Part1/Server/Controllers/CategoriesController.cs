@@ -28,5 +28,12 @@ namespace Linnworks.CodingTests.Part1.Server.Controllers
 				category.ProductsCount
 			}));
 		}
+
+		[HttpDelete("{categoryId}")]
+		public async Task<ActionResult> Delete(string categoryId)
+		{
+			await LinnWorksClient.DeleteCategory(categoryId);
+			return Ok();
+		}
 	}
 }

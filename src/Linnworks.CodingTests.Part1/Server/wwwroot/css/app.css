@@ -1,1 +1,5 @@
-﻿
+﻿.table > tbody > tr.active th,
+.table > tbody > tr.active td {
+	background-color: #7952b3;
+	color: white;
+}
