@@ -31,6 +31,16 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 			});
 		}
 
+		public async Task<Category> CreateCategory(string categoryName)
+		{
+			var category = await SendRequest<Category>("https://us.linnworks.net//api/Inventory/CreateCategory", new Dictionary<string, string>
+			{
+				{ "categoryName", categoryName }
+			});
+
+			return category;
+		}
+
 		public async Task DeleteCategory(string categoryId)
 		{
 			var response = await SendRequest("https://us.linnworks.net//api/Inventory/DeleteCategoryById", new Dictionary<string, string>
@@ -40,7 +50,6 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 
 			if (response.IsSuccessStatusCode)
 				return;
-
 
 			throw new InvalidOperationException();
 		}

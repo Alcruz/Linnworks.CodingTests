@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Linnworks.CodingTests.Part1.Server.API.Client;
+using System;
+using Linnworks.CodingTests.Part1.Server.API.Client.Models;
 
 namespace Linnworks.CodingTests.Part1.Server.Controllers
 {
@@ -22,18 +24,43 @@ namespace Linnworks.CodingTests.Part1.Server.Controllers
 		public async Task<ActionResult<IEnumerable<object>>> GetAllAsync()
 		{
 			var categories = await LinnWorksClient.GetCategories();
-			return Ok(categories.Select(category => new { 
+			return Ok(categories.Select(category => new 
+			{
 				category.Id,
 				category.Name,
 				category.ProductsCount
 			}));
 		}
 
+		[HttpPost]
+		public async Task<ActionResult<object>> CreateAsync(CreateCategory model) 
+		{
+			var category = await model.Create(LinnWorksClient);
+			return Ok(new 
+			{ 
+				category.Id,
+				category.Name
+			});
+		}
+
 		[HttpDelete("{categoryId}")]
-		public async Task<ActionResult> Delete(string categoryId)
+		public async Task<ActionResult> DeleteAsync(string categoryId)
 		{
 			await LinnWorksClient.DeleteCategory(categoryId);
-			return Ok();
+			return NoContent();
+		}
+
+		public class CreateCategory
+		{
+			public string Name { get; set; }
+
+			internal Task<Category> Create(LinnworksClient linnWorksClient)
+			{
+				if (Name == null)
+					throw new NullReferenceException(Name);
+
+				return linnWorksClient.CreateCategory(Name);
+			}
 		}
 	}
 }
