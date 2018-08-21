@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>Linnworks.CodingTests.Part1.Server</AssemblyName>
     <RootNamespace>Linnworks.CodingTests.Part1.Server</RootNamespace>
+    <UserSecretsId>39e31def-a279-4116-abbb-1cb05e1571be</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

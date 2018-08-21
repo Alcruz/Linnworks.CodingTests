@@ -5,22 +5,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Linnworks.CodingTests.Part1.Server.API.Client
 {
 	public class LinnworksClient
 	{
-		public LinnworksClient()
+		public LinnworksClient(string baseUrl, string authSession)
 		{
-			HttpClient = new HttpClient();
+			HttpClient = new HttpClient(new AuthSessionHandler(authSession) { InnerHandler = new HttpClientHandler() });
+			HttpClient.BaseAddress = new Uri(baseUrl);
 		}
 
 		public HttpClient HttpClient { get; }
 
 		public async Task<IEnumerable<Category>> GetCategories()
 		{
-			var categories = await SendRequest<IEnumerable<Category>>("https://us.linnworks.net//api/Inventory/GetCategories");
+			var categories = await SendRequest<IEnumerable<Category>>("Inventory/GetCategories");
 			ExecuteCustomScriptResult<ProductCategoryCount> productsCount = await GetProductCategoryCount();
 			var productsCountDict = productsCount.Results.ToDictionary(x => x.CategoryId, x => x.ProductsCount);
 			return categories.Select(category => new Category
@@ -33,7 +35,7 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 
 		public async Task<Category> CreateCategory(string categoryName)
 		{
-			var category = await SendRequest<Category>("https://us.linnworks.net//api/Inventory/CreateCategory", new Dictionary<string, string>
+			var category = await SendRequest<Category>("Inventory/CreateCategory", new Dictionary<string, string>
 			{
 				{ "categoryName", categoryName }
 			});
@@ -43,7 +45,7 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 
 		public async Task DeleteCategory(string categoryId)
 		{
-			var response = await SendRequest("https://us.linnworks.net//api/Inventory/DeleteCategoryById", new Dictionary<string, string>
+			var response = await SendRequest("Inventory/DeleteCategoryById", new Dictionary<string, string>
 			{
 				{ "categoryId", categoryId }
 			});
@@ -61,7 +63,7 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 
 		private Task<ExecuteCustomScriptResult<TResult>> ExecuteCustomScript<TResult>(string customScript)
 		{
-			return SendRequest<ExecuteCustomScriptResult<TResult>>("https://us.linnworks.net//api/Dashboards/ExecuteCustomScriptQuery", new Dictionary<string, string>
+			return SendRequest<ExecuteCustomScriptResult<TResult>>("Dashboards/ExecuteCustomScriptQuery", new Dictionary<string, string>
 			{
 				{ "script", customScript}
 			});
@@ -78,13 +80,33 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 		private async Task<HttpResponseMessage> SendRequest(string uri, Dictionary<string, string> body = null)
 		{
 			var request = new HttpRequestMessage(HttpMethod.Post, uri);
-			request.Headers.Add("Authorization", "de259865-33b2-4f0c-a9c1-82958fb32cc9");
 			if (body != null)
 			{
 				request.Content = new FormUrlEncodedContent(body);
 			}
 
 			return await HttpClient.SendAsync(request);
+		}
+
+		private class AuthSessionHandler : MessageProcessingHandler
+		{
+			public string AuthSession { get; }
+
+			public AuthSessionHandler(string authSession)
+			{
+				AuthSession = authSession;
+			}
+
+			protected override HttpRequestMessage ProcessRequest(HttpRequestMessage request, CancellationToken cancellationToken)
+			{
+				request.Headers.Add("Authorization", new string[] { AuthSession });
+				return request;
+			}
+
+			protected override HttpResponseMessage ProcessResponse(HttpResponseMessage response, CancellationToken cancellationToken)
+			{
+				return response;
+			}
 		}
 	}
 }
