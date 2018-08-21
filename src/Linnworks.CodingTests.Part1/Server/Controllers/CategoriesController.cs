@@ -52,14 +52,14 @@ namespace Linnworks.CodingTests.Part1.Server.Controllers
 
 		public class CreateCategory
 		{
-			public string Name { get; set; }
+			public string CategoryName { get; set; }
 
 			internal Task<Category> Create(LinnworksClient linnWorksClient)
 			{
-				if (Name == null)
-					throw new NullReferenceException(Name);
+				if (CategoryName == null)
+					throw new NullReferenceException(CategoryName);
 
-				return linnWorksClient.CreateCategory(Name);
+				return linnWorksClient.CreateCategory(CategoryName);
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 ﻿(function() {
-	'use strict';
+	"use strict";
 
 	angular
 		.module("app")
@@ -9,12 +9,14 @@
 			controller: CategoriesTableController
 		});
 
-	CategoriesTableController.$inject = ["categoriesService", "NgTableParams"];
+	CategoriesTableController.$inject = ["categoriesService", "NgTableParams", "$uibModal"];
 
-	function CategoriesTableController(categoriesService, NgTableParams) {
+	function CategoriesTableController(categoriesService, NgTableParams, $uibModal) {
 		var viewModel = this;
 		viewModel.select = selectCategory;
 		viewModel.deleteSelectedCategory = deleteSelectedCategory;
+		viewModel.openCategoryCreateModal = openCategoryCreateModal;
+
 		activate();
 
 		function activate() {
@@ -42,6 +44,30 @@
 		function selectCategory(selectedCategory) {
 			viewModel.selectedCategory = selectedCategory;
 		};
+
+		function openCategoryCreateModal() {
+			var modalInstance = $uibModal.open({
+				animation: true,
+				ariaLabelledBy: "modal-title",
+				ariaDescribedBy: "modal-body",
+				templateUrl: "app/categories/categories-create-modal.html",
+				controller: "CategoryCreateModalController",
+				controllerAs: "controller",
+				size: "lg",
+				//appendTo: parentElem,
+				//resolve: {
+				//	items: function() {
+				//		return $ctrl.items;
+				//	}
+				//}
+			});
+
+			//modalInstance.result.then(function(selectedItem) {
+			//	$ctrl.selected = selectedItem;
+			//}, function() {
+			//	$log.info("Modal dismissed at: " + new Date());
+			//});
+		}
 	};
 })();
 

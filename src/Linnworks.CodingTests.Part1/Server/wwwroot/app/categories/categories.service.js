@@ -10,7 +10,8 @@
 	function categoriesService($http) {
 		var service = {
 			getAll: getAll,
-			delete: deleteCategory
+			delete: deleteCategory,
+			create: create
 		};
 
 		return service;
@@ -22,6 +23,13 @@
 
 		function deleteCategory(categoryId) {
 			return $http.delete("/api/categories/" + categoryId);				;
+		};
+
+		function create(category) {
+			return $http.post("/api/categories/", category)
+					.then(function(response) {
+						return response.data;
+					});
 		};
 	}
 })();
