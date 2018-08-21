@@ -5,10 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Linnworks.CodingTests.Part1.Server.Services
+namespace Linnworks.CodingTests.Part1.Server.API.Client
 {
 	// https://stackoverflow.com/questions/3314140/how-to-read-embedded-resource-text-file
-	public static class EmbeddedResourceHelpers
+	internal static class EmbeddedResourceHelpers
 	{
 		public static string ReadFile(string resourceName)
 		{

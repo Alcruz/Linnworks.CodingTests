@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Linnworks.CodingTests.Part1.Server.Services.Models
+namespace Linnworks.CodingTests.Part1.Server.API.Client.Models
 {
 	public class Category
 	{

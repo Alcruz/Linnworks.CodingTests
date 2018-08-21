@@ -1,4 +1,4 @@
-﻿namespace Linnworks.CodingTests.Part1.Server.Services
+﻿namespace Linnworks.CodingTests.Part1.Server.Services.Models
 {
 	public class ProductCategoryCount
 	{

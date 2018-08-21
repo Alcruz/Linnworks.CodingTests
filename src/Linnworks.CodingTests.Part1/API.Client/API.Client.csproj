@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Linnworks.CodingTests.Part1.Server.API.Client</AssemblyName>
+    <RootNamespace>Linnworks.CodingTests.Part1.Server.API.Client</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="CustomScripts\ProductCategoriesCount.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CustomScripts\ProductCategoriesCount.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+</Project>

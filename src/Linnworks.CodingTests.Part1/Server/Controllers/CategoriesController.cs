@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using Linnworks.CodingTests.Part1.Server.Services.Models;
+using Linnworks.CodingTests.Part1.Server.API.Client;
 
 namespace Linnworks.CodingTests.Part1.Server.Controllers
 {
@@ -13,7 +13,7 @@ namespace Linnworks.CodingTests.Part1.Server.Controllers
 	{
 		public CategoriesController()
 		{
-			LinnWorksClient = new LinnworksClient(new System.Net.Http.HttpClient());
+			LinnWorksClient = new LinnworksClient();
 		}
 
 		public LinnworksClient LinnWorksClient { get; }

@@ -1,4 +1,5 @@
-﻿using Linnworks.CodingTests.Part1.Server.Services.Models;
+﻿using Linnworks.CodingTests.Part1.Server.API.Client.Models;
+using Linnworks.CodingTests.Part1.Server.Services.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,13 +7,13 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Linnworks.CodingTests.Part1.Server.Services
+namespace Linnworks.CodingTests.Part1.Server.API.Client
 {
 	public class LinnworksClient
 	{
-		public LinnworksClient(HttpClient httpClient)
+		public LinnworksClient()
 		{
-			HttpClient = httpClient;
+			HttpClient = new HttpClient();
 		}
 
 		public HttpClient HttpClient { get; }
@@ -46,7 +47,7 @@ namespace Linnworks.CodingTests.Part1.Server.Services
 
 		private async Task<ExecuteCustomScriptResult<ProductCategoryCount>> GetProductCategoryCount()
 		{
-			return await ExecuteCustomScript<ProductCategoryCount>(EmbeddedResourceHelpers.ReadFile("Linnworks.CodingTests.Part1.Server.Services.CustomScripts.ProductCategoriesCount.sql"));
+			return await ExecuteCustomScript<ProductCategoryCount>(EmbeddedResourceHelpers.ReadFile("Linnworks.CodingTests.Part1.Server.API.Client.CustomScripts.ProductCategoriesCount.sql"));
 		}
 
 		private Task<ExecuteCustomScriptResult<TResult>> ExecuteCustomScript<TResult>(string customScript)
