@@ -10,10 +10,13 @@ using System.Threading.Tasks;
 
 namespace Linnworks.CodingTests.Part1.Server.API.Client
 {
-	public class LinnworksClient
+	public class LinnworksClient : ILinnworksClient
 	{
 		public LinnworksClient(string baseUrl, string authSession)
 		{
+			if (string.IsNullOrWhiteSpace(baseUrl) || string.IsNullOrWhiteSpace(authSession))
+				throw new InvalidOperationException();
+
 			HttpClient = new HttpClient(new AuthSessionHandler(authSession) { InnerHandler = new HttpClientHandler() });
 			HttpClient.BaseAddress = new Uri(baseUrl);
 		}
