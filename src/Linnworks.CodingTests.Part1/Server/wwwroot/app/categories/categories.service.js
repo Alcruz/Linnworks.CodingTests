@@ -27,8 +27,8 @@
 
 		function create(category) {
 			return $http.post("/api/categories/", category)
-					.then(function(response) {
-						return response.data;
+				.then(function(response) {
+					return response.data;
 				}).catch(function(errorResponse) {
 					return Promise.reject(errorResponse.data);
 				});

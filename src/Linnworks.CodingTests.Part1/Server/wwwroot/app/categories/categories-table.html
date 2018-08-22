@@ -1,7 +1,7 @@
 ﻿<div>
 	<div style="margin-bottom: 5px;" class="pull-right">
 		<button class="btn btn-default" ng-click="controller.openCategoryCreateModal()"><i class="icon-plus"></i> Add New</button>
-		<button class="btn btn-default" ng-disabled="!controller.selectedCategory" ng-click="controller.deleteSelectedCategory()"><i class="icon-trash"></i> Delete</button>
+		<button class="btn btn-default" ng-click="controller.openDeleteCategoryModal()" ng-disabled="!controller.selectedCategory"><i class="icon-trash"></i> Delete</button>
 	</div>
 
 	<table ng-table="controller.tableParams" class="table table-condensed table-bordered table-striped">

@@ -5,17 +5,17 @@
 
 	CategoryCreateModalController.$inject = ["categoriesService", "$uibModalInstance"];
 
-	function CategoryCreateModalController(categoryService, $uibModalInstance) {
+	function CategoryCreateModalController(categoriesService, $uibModalInstance) {
 		viewModel = this;
 		viewModel.categoryName = "";
 		viewModel.ok = ok;
 		viewModel.cancel = cancel;
 
 		function ok() {
-			categoryService.create({
+			categoriesService.create({
 				categoryName: viewModel.categoryName
 			}).then(function(){
-				return categoryService.getAll();
+				return categoriesService.getAll();
 			}).then(function(data) {
 				$uibModalInstance.close(data);
 			}).catch(function(error) {
@@ -24,7 +24,7 @@
 		};
 
 		function cancel() {
-			$uibModalInstance.dismiss('cancel');
+			$uibModalInstance.dismiss("cancel");
 		};
 	};
 })();

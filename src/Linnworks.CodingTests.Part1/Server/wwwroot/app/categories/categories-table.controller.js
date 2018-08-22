@@ -14,8 +14,8 @@
 	function CategoriesTableController(categoriesService, NgTableParams, $uibModal) {
 		var viewModel = this;
 		viewModel.select = selectCategory;
-		viewModel.deleteSelectedCategory = deleteSelectedCategory;
 		viewModel.openCategoryCreateModal = openCategoryCreateModal;
+		viewModel.openDeleteCategoryModal = openDeleteCategoryModal;
 
 		activate();
 
@@ -29,15 +29,6 @@
 					viewModel.tableParams = new NgTableParams({}, {
 						dataset: data
 					});
-				});
-		};
-
-		function deleteSelectedCategory() {
-			categoriesService.delete(viewModel.selectedCategory.id)
-				.then(function() {
-					console.log("category deleted");
-				}).catch(function() {
-					console.log("category not deleted");
 				});
 		};
 
@@ -61,7 +52,30 @@
 					dataset: data
 				});
 			});
-		}
+		};
+
+		function openDeleteCategoryModal() {
+			var modalInstance = $uibModal.open({
+				animation: true,
+				ariaLabelledBy: "modal-title",
+				ariaDescribedBy: "modal-body",
+				templateUrl: "app/categories/categories-delete-modal.html",
+				controller: "CategoryDeleteModalController",
+				controllerAs: "controller",
+				size: "lg",
+				resolve: {
+					category: function() {
+						return viewModel.selectedCategory;
+					}
+				}
+			});
+
+			modalInstance.result.then(function(data) {
+				viewModel.tableParams = new NgTableParams({}, {
+					dataset: data
+				});
+			});
+		};
 	};
 })();
 
