@@ -23,7 +23,7 @@ namespace Linnworks.CodingTests.Part1.Server.Controllers
 		public async Task<ActionResult<IEnumerable<object>>> GetAllAsync()
 		{
 			var categories = await LinnworksClient.GetCategories();
-			return Ok(categories.Select(category => new 
+			return Ok(categories.Select(category => new
 			{
 				category.Id,
 				category.Name,
@@ -32,14 +32,22 @@ namespace Linnworks.CodingTests.Part1.Server.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<object>> CreateAsync(CreateCategory model) 
+		public async Task<ActionResult<object>> CreateAsync(CreateCategory model)
 		{
-			var category = await model.Create(LinnworksClient);
-			return Ok(new 
-			{ 
-				category.Id,
-				category.Name
-			});
+			try
+			{
+				var category = await model.Create(LinnworksClient);
+
+				return Ok(new
+				{
+					category.Id,
+					category.Name
+				});
+			}
+			catch (LinnworksBadRequestException badRequest)
+			{
+				return BadRequest(badRequest.ErrorResponse);
+			}
 		}
 
 		[HttpDelete("{categoryId}")]
@@ -57,6 +65,7 @@ namespace Linnworks.CodingTests.Part1.Server.Controllers
 			{
 				if (CategoryName == null)
 					throw new NullReferenceException(CategoryName);
+
 
 				return LinnworksClient.CreateCategory(CategoryName);
 			}

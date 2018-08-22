@@ -54,19 +54,13 @@
 				controller: "CategoryCreateModalController",
 				controllerAs: "controller",
 				size: "lg",
-				//appendTo: parentElem,
-				//resolve: {
-				//	items: function() {
-				//		return $ctrl.items;
-				//	}
-				//}
 			});
 
-			//modalInstance.result.then(function(selectedItem) {
-			//	$ctrl.selected = selectedItem;
-			//}, function() {
-			//	$log.info("Modal dismissed at: " + new Date());
-			//});
+			modalInstance.result.then(function(data) {
+				viewModel.tableParams = new NgTableParams({}, {
+					dataset: data
+				});
+			});
 		}
 	};
 })();

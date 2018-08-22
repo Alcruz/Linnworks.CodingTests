@@ -76,6 +76,11 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 		private async Task<T> SendRequest<T>(string uri, Dictionary<string, string> body = null)
 		{
 			var response = await SendRequest(uri, body);
+			if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+				throw new LinnworksBadRequestException(JsonConvert.DeserializeObject<ErrorResponse>(await response.Content.ReadAsStringAsync()));
+			else if (!response.IsSuccessStatusCode)
+				throw new InvalidOperationException();
+
 			var content = await response.Content.ReadAsStringAsync();
 			var result = JsonConvert.DeserializeObject<T>(content);
 			return result;

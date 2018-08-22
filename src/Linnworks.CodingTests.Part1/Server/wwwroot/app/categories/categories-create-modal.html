@@ -6,6 +6,7 @@
 		<div class="form-group">
 			<label for="categoryName">Category Name</label>
 			<input ng-model="controller.categoryName" type="text" class="form-control" id="category-name" name="category-name" placeholder="Category #1">
+			<span class="text-error" ng-show="!!controller.error">{{controller.error}}</span>
 		</div>
 	</form>
 </div>

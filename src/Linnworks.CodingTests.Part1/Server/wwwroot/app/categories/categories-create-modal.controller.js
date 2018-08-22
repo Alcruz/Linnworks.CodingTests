@@ -14,8 +14,12 @@
 		function ok() {
 			categoryService.create({
 				categoryName: viewModel.categoryName
-			}).then(function(createdItem) {
-				$uibModalInstance.close(createdItem);
+			}).then(function(){
+				return categoryService.getAll();
+			}).then(function(data) {
+				$uibModalInstance.close(data);
+			}).catch(function(error) {
+				viewModel.error = error.message;
 			});
 		};
 
