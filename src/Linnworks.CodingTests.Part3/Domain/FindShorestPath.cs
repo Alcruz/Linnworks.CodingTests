@@ -43,18 +43,21 @@ namespace Linnworks.CodingTests.Part3.Domain
 				explored.Add(node);
 				foreach (var child in SuccessorsFunc.Invoke(node.State).Select(successor => new Node(successor, node)))
 				{
-					if (!explored.Contains(child) && !frontierSet.Contains(child) )
+					if (child.State.Cost > 0)
 					{
-						frontier.Add(child);
-						frontierSet.Add(child);
-					}
-					else if (frontierSet.TryGetValue(child, out Node foundNode) && child.PathCost > foundNode.PathCost)
-					{
-						frontier.Remove(foundNode);
-						frontierSet.Remove(foundNode);
+						if (!explored.Contains(child) && !frontierSet.Contains(child))
+						{
+							frontier.Add(child);
+							frontierSet.Add(child);
+						}
+						else if (frontierSet.TryGetValue(child, out Node foundNode) && child.PathCost > foundNode.PathCost)
+						{
+							frontier.Remove(foundNode);
+							frontierSet.Remove(foundNode);
 
-						frontier.Add(child);
-						frontierSet.Add(child);
+							frontier.Add(child);
+							frontierSet.Add(child);
+						}
 					}
 				}
 			}
