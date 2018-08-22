@@ -1,0 +1,19 @@
+﻿<div>
+	<div style="margin-bottom: 5px;" class="pull-right">
+		<button class="btn btn-default" ng-click="controller.openCreateCategoryModal()"><i class="icon-plus"></i> Add New</button>
+		<button class="btn btn-default" ng-click="controller.openDeleteCategoryModal()" ng-disabled="!controller.selectedCategory"><i class="icon-trash"></i> Delete</button>
+	</div>
+
+	<table ng-table="controller.tableParams" class="table table-condensed table-bordered table-striped">
+		<tr ng-click="controller.select(category)" ng-class="{ 'active': controller.selectedCategory === category }" ng-repeat="category in $data">
+			<td data-title="''" width="3%">
+			</td>
+			<td title="'Name'" sortable="'name'">
+				{{category.name}}
+			</td>
+			<td title="'Products Count'" class="text-center" width="20%" sortable="'productsCount'">
+				{{category.productsCount}}
+			</td>
+		</tr>
+	</table>
+</div>

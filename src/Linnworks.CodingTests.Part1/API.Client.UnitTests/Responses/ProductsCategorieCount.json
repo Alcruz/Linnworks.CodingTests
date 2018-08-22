@@ -1,0 +1,31 @@
+﻿{
+	"IsError": false,
+	"ErrorMessage": null,
+	"TotalResults": 16,
+	"Columns": [
+		{
+			"Index": 0,
+			"Name": "CategoryId",
+			"Type": "Guid"
+		},
+		{
+			"Index": 1,
+			"Name": "Total",
+			"Type": "Int32"
+		}
+	],
+	"Results": [
+		{
+			"CategoryId": "00000000-0000-0000-0000-000000000000",
+			"ProductsCount": 10
+		},
+		{
+			"CategoryId": "f1bc8389-1ab6-4fad-9f9f-fcd41e508a64",
+			"ProductsCount": 1
+		},
+		{
+			"CategoryId": "a4769e8c-1257-4c04-9224-f53efb0bbd2a",
+			"ProductsCount": 5
+		}
+	]
+}

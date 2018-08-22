@@ -1,0 +1,18 @@
+﻿[
+	{
+		"CategoryId": "00000000-0000-0000-0000-000000000000",
+		"CategoryName": "Default"
+	},
+	{
+		"CategoryId": "f1bc8389-1ab6-4fad-9f9f-fcd41e508a64",
+		"CategoryName": "Clothes"
+	},
+	{
+		"CategoryId": "a4769e8c-1257-4c04-9224-f53efb0bbd2a",
+		"CategoryName": "Food"
+	},
+	{
+		"CategoryId": "a52e8f93-aa46-4420-a2af-39e40ad9844f",
+		"CategoryName": "New Category"
+	}
+]

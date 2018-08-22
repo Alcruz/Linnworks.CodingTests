@@ -1,0 +1,16 @@
+﻿<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">Create Category Form</h3>
+</div>
+<div class="modal-body" id="modal-body">
+	<form name="create-category-form" id="create-category-form">
+		<div class="form-group">
+			<label for="categoryName">Category Name</label>
+			<input ng-model="controller.categoryName" type="text" class="form-control" id="category-name" name="category-name" placeholder="Category #1">
+			<span class="text-error" ng-show="!!controller.error">{{controller.error}}</span>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button form="create-category-form" class="btn btn-primary" type="button" ng-click="controller.ok()">OK</button>
+	<button class="btn btn-default" type="button" ng-click="controller.cancel()">Cancel</button>
+</div>

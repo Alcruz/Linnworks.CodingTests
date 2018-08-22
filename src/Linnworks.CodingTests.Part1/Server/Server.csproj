@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>Linnworks.CodingTests.Part1.Server</AssemblyName>
+    <RootNamespace>Linnworks.CodingTests.Part1.Server</RootNamespace>
+    <UserSecretsId>39e31def-a279-4116-abbb-1cb05e1571be</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\API.Client\API.Client.csproj" />
+  </ItemGroup>
+
+</Project>

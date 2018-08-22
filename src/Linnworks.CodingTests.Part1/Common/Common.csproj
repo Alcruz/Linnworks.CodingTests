@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Linnworks.CodingTests.Part1.Server.Common</AssemblyName>
+    <RootNamespace>Linnworks.CodingTests.Part1.Server.Common</RootNamespace>
+  </PropertyGroup>
+
+</Project>
