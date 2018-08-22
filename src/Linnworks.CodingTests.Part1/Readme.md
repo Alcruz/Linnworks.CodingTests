@@ -7,7 +7,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-To be able to ran this project you should add Linnworks User session as an app secret. 
+To be able to run this project you should add Linnworks User session as an app secret. 
 
 ```
 dotnet user-secrets set "Linnworks:AuthSession" "{LINNWORKS_SESSION}"
