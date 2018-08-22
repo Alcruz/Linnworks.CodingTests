@@ -1,11 +1,11 @@
 ﻿(function() {
 	angular
 		.module("app")
-		.controller("CategoryCreateModalController", CategoryCreateModalController);
+		.controller("CreateCategoryModalController", CreateCategoryModalController);
 
-	CategoryCreateModalController.$inject = ["categoriesService", "$uibModalInstance"];
+	CreateCategoryModalController.$inject = ["categoriesService", "$uibModalInstance"];
 
-	function CategoryCreateModalController(categoriesService, $uibModalInstance) {
+	function CreateCategoryModalController(categoriesService, $uibModalInstance) {
 		viewModel = this;
 		viewModel.categoryName = "";
 		viewModel.ok = ok;

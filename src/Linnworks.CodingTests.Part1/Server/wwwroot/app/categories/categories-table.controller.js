@@ -14,7 +14,7 @@
 	function CategoriesTableController(categoriesService, NgTableParams, $uibModal) {
 		var viewModel = this;
 		viewModel.select = selectCategory;
-		viewModel.openCategoryCreateModal = openCategoryCreateModal;
+		viewModel.openCreateCategoryModal = openCreateCategoryModal;
 		viewModel.openDeleteCategoryModal = openDeleteCategoryModal;
 
 		activate();
@@ -36,18 +36,19 @@
 			viewModel.selectedCategory = selectedCategory;
 		};
 
-		function openCategoryCreateModal() {
+		function openCreateCategoryModal() {
 			var modalInstance = $uibModal.open({
 				animation: true,
 				ariaLabelledBy: "modal-title",
 				ariaDescribedBy: "modal-body",
-				templateUrl: "app/categories/categories-create-modal.html",
-				controller: "CategoryCreateModalController",
+				templateUrl: "app/categories/create-category-modal.html",
+				controller: "CreateCategoryModalController",
 				controllerAs: "controller",
 				size: "lg",
 			});
 
-			modalInstance.result.then(function(data) {
+			modalInstance.result.then(function(data){
+				viewModel.selectedCategory = null;
 				viewModel.tableParams = new NgTableParams({}, {
 					dataset: data
 				});
@@ -59,8 +60,8 @@
 				animation: true,
 				ariaLabelledBy: "modal-title",
 				ariaDescribedBy: "modal-body",
-				templateUrl: "app/categories/categories-delete-modal.html",
-				controller: "CategoryDeleteModalController",
+				templateUrl: "app/categories/delete-category-modal.html",
+				controller: "DeleteCategoryModalController",
 				controllerAs: "controller",
 				size: "lg",
 				resolve: {
@@ -71,6 +72,7 @@
 			});
 
 			modalInstance.result.then(function(data) {
+				viewModel.selectedCategory = null;
 				viewModel.tableParams = new NgTableParams({}, {
 					dataset: data
 				});

@@ -3,11 +3,11 @@
 
     angular
         .module("app")
-		.controller("CategoryDeleteModalController", CategoryDeleteModalController);
+		.controller("DeleteCategoryModalController", DeleteCategoryModalController);
 
-	CategoryDeleteModalController.$inject = ["categoriesService", "$uibModalInstance", "category"];
+	DeleteCategoryModalController.$inject = ["categoriesService", "$uibModalInstance", "category"];
 
-	function CategoryDeleteModalController(categoriesService, $uibModalInstance, category) {
+	function DeleteCategoryModalController(categoriesService, $uibModalInstance, category) {
 		var viewModel = this;
 		viewModel.ok = ok;
 		viewModel.cancel = cancel;
