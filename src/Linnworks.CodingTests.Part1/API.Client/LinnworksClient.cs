@@ -1,4 +1,5 @@
 ﻿using Linnworks.CodingTests.Part1.Server.API.Client.Models;
+using Linnworks.CodingTests.Part1.Server.Common;
 using Linnworks.CodingTests.Part1.Server.Services.Models;
 using Newtonsoft.Json;
 using System;
@@ -25,7 +26,7 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 
 		public async Task<IEnumerable<Category>> GetCategories()
 		{
-			var categories = await SendRequest<IEnumerable<Category>>("Inventory/GetCategories");
+			var categories = await SendRequest<IEnumerable<Category>>(Constants.GetCategoriesUrl);
 			ExecuteCustomScriptResult<ProductCategoryCount> productsCount = await GetProductCategoryCount();
 			var productsCountDict = productsCount.Results.ToDictionary(x => x.CategoryId, x => x.ProductsCount);
 			return categories.Select(category => new Category
@@ -38,7 +39,7 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 
 		public async Task<Category> CreateCategory(string categoryName)
 		{
-			var category = await SendRequest<Category>("Inventory/CreateCategory", new Dictionary<string, string>
+			var category = await SendRequest<Category>(Constants.CreateCategoryUrl, new Dictionary<string, string>
 			{
 				{ "categoryName", categoryName }
 			});
@@ -48,7 +49,7 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 
 		public async Task DeleteCategory(string categoryId)
 		{
-			var response = await SendRequest("Inventory/DeleteCategoryById", new Dictionary<string, string>
+			var response = await SendRequest(Constants.DeleteCategoryByIdUrl, new Dictionary<string, string>
 			{
 				{ "categoryId", categoryId }
 			});
@@ -66,7 +67,7 @@ namespace Linnworks.CodingTests.Part1.Server.API.Client
 
 		private Task<ExecuteCustomScriptResult<TResult>> ExecuteCustomScript<TResult>(string customScript)
 		{
-			return SendRequest<ExecuteCustomScriptResult<TResult>>("Dashboards/ExecuteCustomScriptQuery", new Dictionary<string, string>
+			return SendRequest<ExecuteCustomScriptResult<TResult>>(Constants.ExecuteCustomScriptQueryUrl, new Dictionary<string, string>
 			{
 				{ "script", customScript}
 			});
